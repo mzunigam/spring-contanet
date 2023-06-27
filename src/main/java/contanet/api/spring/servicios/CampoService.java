@@ -55,8 +55,11 @@ public class CampoService {
         if (response.getBoolean("status")) {
             Campo campo = new Campo();
             if(obj.isNull("id_campo") || obj.getInt("id_campo") == 0){
-                campoRepository.findAll().stream().mapToInt(x -> x.getId_campo()).max().ifPresent(x -> campo.setId_campo(x + 2)
-                );
+                if(campoRepository.findAll().size() == 0){
+                    campo.setId_campo(1);
+                }else{
+                    campo.setId_campo(campoRepository.findAll().get(campoRepository.findAll().size()-1).getId_campo()+1);
+                }
             }else{
                 campo.setId_campo(obj.getInt("id_campo"));
             }
