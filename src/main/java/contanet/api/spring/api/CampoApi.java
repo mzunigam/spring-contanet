@@ -61,7 +61,7 @@ public class CampoApi {
     }
 
     @GetMapping("/campo/{id}")
-    public Campo getPersonal(@PathVariable("id") Integer id) {
+    public Campo getCampo(@PathVariable("id") Integer id) {
         Optional<Campo> campo = campoRepository.findById(id);
         if (campo.isPresent()) {
             return campo.get();
@@ -71,7 +71,7 @@ public class CampoApi {
     }
 
     @PutMapping("/campo")
-    public Respuesta<Campo>updatePersonal(@RequestBody Campo campo) {
+    public Respuesta<Campo>updateCampo(@RequestBody Campo campo) {
         Optional<Campo> campoOptional = campoRepository.findById(campo.getId_campo());
         if (campoOptional.isPresent()) {
             campoRepository.save(campo);
@@ -82,7 +82,7 @@ public class CampoApi {
     }
 
     @DeleteMapping("/campo/{id}")
-    public String deletePersonal(@PathVariable("id") Integer id) {
+    public String deleteCampo(@PathVariable("id") Integer id) {
         Optional<Campo> campo = campoRepository.findById(id);
         if (!campo.isPresent()) {
             return new JSONObject().put("message", "Campo no encontrado").put("status", false).toString();
